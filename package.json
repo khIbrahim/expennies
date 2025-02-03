@@ -4,15 +4,21 @@
   "scripts": {
     "dev": "encore dev",
     "watch": "encore dev --watch",
-    "build": "encore production --progress"
+    "build": "encore production"
   },
   "devDependencies": {
     "@popperjs/core": "^2.11.6",
     "@symfony/webpack-encore": "^4.0.0",
     "bootstrap": "^5.2.1",
+    "bootstrap-icons": "^1.10.2",
+    "core-js": "^3.26.1",
+    "datatables.net": "^1.13.11",
+    "datatables.net-dt": "^1.13.11",
     "file-loader": "^6.2.0",
     "sass": "^1.54.9",
     "sass-loader": "^13.0.2",
-    "webpack-notifier": "^1.15.0"
+    "webpack-dev-server": "^5.2.0",
+    "webpack-notifier": "^1.15.0",
+    "chart.js": "^4.3.2"
   }
 }

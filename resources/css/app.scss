@@ -1,6 +1,9 @@
 $primary: #018EFC;
 
 @import "~bootstrap/scss/bootstrap";
+@import "./variables.scss";
+@import "~bootstrap-icons/font/bootstrap-icons";
+@import "~datatables.net-dt/css/jquery.dataTables.css";
 
 * {
   font-family: 'Roboto', sans-serif !important;

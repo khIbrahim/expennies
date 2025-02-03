@@ -1,0 +1,26 @@
+{% extends 'layout.twig' %}
+
+{% block title %}
+    Verify
+{% endblock %}
+
+{% block content %}
+
+    {% if sent is defined %}
+        <div class="alert alert-success">
+            {{ sent }}
+        </div>
+    {% else %}
+        <div class="alert alert-success">
+            No email sent
+        </div>
+    {% endif %}
+
+    <div class="container content-body">
+        <div class="alert alert-warning d-flex justify-content-between align-items-center" role="alert">
+            <span>Please check your emails & activate your account</span>
+            <a href="/verify">Resend Activation Email</a>
+        </div>
+    </div>
+
+{% endblock %}

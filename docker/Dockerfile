@@ -1,4 +1,4 @@
-FROM php:8.1-fpm
+FROM php:8.2-fpm
 
 ARG USER
 ARG USER_ID
@@ -19,11 +19,14 @@ RUN curl -sL https://deb.nodesource.com/setup_16.x | bash \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+RUN docker-php-ext-install intl
 RUN docker-php-ext-configure intl
 RUN docker-php-ext-install pdo pdo_mysql intl
 
 RUN pecl install xdebug \
-    && docker-php-ext-enable xdebug
+    && pecl install redis \
+    && docker-php-ext-enable xdebug \
+    && docker-php-ext-enable redis
 
 COPY xdebug.ini "${PHP_INI_DIR}/conf.d"
 

@@ -21,6 +21,12 @@ Encore
      */
     .addEntry("app", "./resources/js/app.js")
     .addEntry("dashboard", "./resources/js/dashboard.js")
+    .addEntry("categories", "./resources/js/categories.js")
+    .addEntry("auth", "./resources/js/auth.js")
+    .addEntry("ajax", "./resources/js/ajax.js")
+    .addEntry("transactions", "./resources/js/transactions.js")
+    .addEntry("profile", "./resources/js/profile.js")
+    .addEntry("forgot_password", "./resources/js/forgot_password.js")
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()
@@ -62,4 +68,7 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
 
-module.exports = Encore.getWebpackConfig()
+module.exports = {
+        ...Encore.getWebpackConfig(),
+        watch: true
+}

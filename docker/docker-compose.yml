@@ -1,9 +1,7 @@
-version: '3.8'
-
 services:
   app:
     build:
-      context: ""
+      context: .
       dockerfile: Dockerfile
       args:
         USER_ID: '${WWWUSER:-1000}'
@@ -14,8 +12,11 @@ services:
     working_dir: /var/www/
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    ports:
+      - "9003:9003"
     volumes:
       - ../:/var/www
+      - ./local.ini:/usr/local/etc/php/conf.d/local.ini
   nginx:
     image: nginx:1.19-alpine
     container_name: expennies-nginx
@@ -35,3 +36,23 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
       - "3306:3306"
+  mailhog:
+    container_name: expennies_mailhog
+    image: mailhog/mailhog
+    restart: always
+    logging:
+      driver: "none"
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+  redis:
+    image: redis:latest
+    container_name: expennies-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass mypassword
+
+volumes:
+  mysql_data:
+    driver: local

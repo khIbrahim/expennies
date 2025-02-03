@@ -17,31 +17,54 @@
         <div class="top-container mb-4 row g-0 rounded-4">
             <div class="col-8 border-end border-3">
                 <div class="row justify-content-between">
-                    <div class="col p-4">Expense $</div>
-                    <div class="col p-4">Income $</div>
-                    <div class="col p-4">Net $</div>
+                    <div class="col p-4 d-flex flex-column align-items-center justify-content-center">
+                        <h5 class="fw-bold">Expense</h5>
+                        <span class="fs-3 text-danger">${{ summary.expense | number_format(2) }}</span>
+                    </div>
+                    <div class="col p-4">
+                        <h5 class="fw-bold">Income</h5>
+                        <span class="fs-3 text-success">${{ summary.income | number_format(2) }}</span>
+                    </div>
+                    <div class="col p-4">
+                        <h5 class="fw-bold">Net</h5>
+                        <span class="fs-3 {{ summary.net > 0 ? "text-success" : "text-danger" }}">${{ summary.net | number_format(2) }}</span>
+                    </div>
                 </div>
                 <div class="row">
-                    <div class="col p-4">Line/Bar/Donut Graph</div>
+                    <div class="col p-4">
+                        <div class="fs-1 text-center mb-1 mt-0" style="margin-top: -10px;">{{ now | date('Y') }} Summary</div>
+                        <canvas id="monthlySummaryChart" height="237" width="704"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="col p-4">
-                Latest Transactions
+                <div class="col p-4">
+                    <h5 class="fw-bold mb-3">Latest Transactions</h5>
+                    <div class="transaction-list">
+                        {% for transaction in recentTransactions %}
+                            <div class="transaction-card p-3 mb-2 d-flex justify-content-between align-items-center rounded-3 shadow-sm {% if transaction.amount < 0 %}bg-danger bg-opacity-25{% else %}bg-success bg-opacity-25{% endif %}">
+                                <div>
+                                    <h6 class="fw-bold">{{ transaction.category.name }}</h6>
+                                    <small class="text-muted mt-0">{{ transaction.date | date("d M Y") }}</small>
+                                </div>
+                                <span class="fw-bold {% if transaction.amount < 0 %}text-danger{% else %}text-success{% endif %}">{{ transaction.amount < 0 ? "-" : "+" }}${{ transaction.amount | abs }}</span>
+                            </div>
+                        {% else %}
+                            <p class="text-muted">No recent transactions</p>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="categories-container row">
-            <div class="col">
-                <div class="category-card p-4 rounded-4">Category 1</div>
-            </div>
-            <div class="col">
-                <div class="category-card p-4 rounded-4">Category 2</div>
-            </div>
-            <div class="col">
-                <div class="category-card p-4 rounded-4">Category 3</div>
-            </div>
-            <div class="col">
-                <div class="category-card p-4 rounded-4">Category 4</div>
-            </div>
+            {% for category in topSpendingCategories %}
+                <div class="col-12 col-md-4 mb-4">
+                    <div class="category-card p-4 rounded-4">
+                        <h6 class="fs-6 fw-bold d-flex align-items-center justify-content-center">{{ category.name }}</h6>
+                        <h1 class="fs-1 fw-bold text-danger text-opacity-75 d-flex align-items-center justify-content-center">${{ category.total }}</h1>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

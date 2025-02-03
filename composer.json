@@ -15,20 +15,31 @@
     },
     "require": {
         "ext-pdo": "*",
+        "ext-redis": "*",
         "doctrine/dbal": "^3.4",
         "doctrine/migrations": "^3.5",
         "doctrine/orm": "^2.13",
+        "itsgoingd/clockwork": "^5.3",
+        "league/flysystem": "^3.0",
+        "league/mime-type-detection": "^1.16",
         "php-di/php-di": "^6.4",
+        "predis/predis": "^2.3",
+        "psr/simple-cache": "^3.0",
+        "ray/aop": "^2.17",
+        "slim/csrf": "^1.5",
         "slim/psr7": "^1.5",
         "slim/slim": "^4.10",
         "slim/twig-view": "^3.3",
         "symfony/cache": "^6.1",
         "symfony/console": "^6.1",
+        "symfony/mailer": "^7.2",
+        "symfony/rate-limiter": "^7.2",
         "symfony/twig-bridge": "^6.1",
         "symfony/webpack-encore-bundle": "^1.15",
         "twig/intl-extra": "^3.4",
         "twig/twig": "^3.4",
-        "vlucas/phpdotenv": "^5.4"
+        "vlucas/phpdotenv": "^5.4",
+        "vlucas/valitron": "^1.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"
